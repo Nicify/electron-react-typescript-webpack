@@ -1,0 +1,157 @@
+{
+    "name": "product-name",
+    "projectName": "productName",
+    "version": "1.0.0",
+    "description": "productName",
+    "main": "./dist/main.js",
+    "scripts": {
+        "fetchData": "node ./data/index.js",
+        "build:main": "cross-env NODE_ENV=production webpack --config ./config/webpack/main.prod.js",
+        "build:renderer": "cross-env NODE_ENV=production webpack --config ./config/webpack/renderer.prod.js",
+        "build": "npm run clean && run-p build:**",
+        "start-renderer-dev": "cross-env NODE_ENV=development webpack-dev-server --config ./config/webpack/renderer.dev.js --target electron-renderer",
+        "start-main-dev": "webpack --config ./config/webpack/main.js && electron ./dist/main.js",
+        "start-dev": "run-p dev:**",
+        "dev:renderer": "cross-env START_HOT=1 npm run start-renderer-dev",
+        "prestart": "npm run build",
+        "start": "electron .",
+        "pack": "npm run build && cross-env ARCH=x64 electron-buil der --x64 --dir",
+        "dist": "npm run build && cross-env ARCH=x64 electron-builder --x64",
+        "dist:x86": "npm run build && cross-env ARCH=x86 electron-builder --ia32",
+        "dist:win": "npm run build && run-s dist:win:**",
+        "dist:win:x64": "cross-env ARCH=x64 electron-builder  --x64",
+        "dist:win:x86": "cross-env ARCH=x86 electron-builder  --ia32",
+        "postinstall": "electron-builder install-app-deps",
+        "clean": "rimraf dist release",
+        "format": "prettier --write \"@(src|types)/**/*.@(html|js|ts|tsx|css|scss|md)\"",
+        "eslint": "eslint --fix \"@(src|types)/**/*.@(js|ts|tsx)\"",
+        "precommit": "npm run eslint && git add .",
+        "commit": "git-cz"
+    },
+    "build": {
+        "productName": "productName",
+        "appId": "org.your.productname",
+        "compression": "maximum",
+        "electronVersion": "8.2.5",
+        "electronDownload": {
+            "version": "8.2.5",
+            "cache": "./cache",
+            "mirror": "https://npm.taobao.org/mirrors/electron/"
+        },
+        "directories": {
+            "output": "release/${env.ARCH}"
+        },
+        "publish": [
+            {
+                "provider": "generic",
+                "url": ""
+            }
+        ],
+        "files": [
+            "dist/",
+            "!node_modules",
+            "package.json",
+            "updater/"
+        ],
+        "win": {
+            "target": "nsis",
+            "icon": "./build/icons/icon.ico",
+            "requestedExecutionLevel": "requireAdministrator",
+            "artifactName": "product-name-${version}-${env.ARCH}.${ext}",
+            "legalTrademarks": "productName"
+        },
+        "nsis": {
+            "oneClick": false,
+            "perMachine": true,
+            "allowElevation": true,
+            "packElevateHelper": true,
+            "allowToChangeInstallationDirectory": true,
+            "createStartMenuShortcut": false
+        }
+    },
+    "license": "NO LICENSE",
+    "config": {
+        "commitizen": {
+            "path": "node_modules/cz-conventional-changelog"
+        }
+    },
+    "author": {
+        "name": "productName"
+    },
+    "dependencies": {
+        "classnames": "^2.2.6",
+        "fs-extra": "^9.0.1",
+        "got": "11.8.1",
+        "immer": "^8.0.0",
+        "ky": "^0.25.1",
+        "lodash-es": "^4.17.15",
+        "node-loader": "^1.0.2",
+        "react": "^17.0.1",
+        "react-dom": "^17.0.1",
+        "react-router-dom": "^5.2.0",
+        "styled-components": "^5.2.1",
+        "use-immer": "^0.4.2"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.12.10",
+        "@babel/plugin-proposal-class-properties": "^7.12.1",
+        "@babel/plugin-proposal-decorators": "^7.12.1",
+        "@babel/plugin-proposal-nullish-coalescing-operator": "^7.12.1",
+        "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+        "@babel/polyfill": "^7.12.1",
+        "@babel/preset-env": "^7.12.10",
+        "@babel/preset-react": "^7.12.10",
+        "@babel/preset-typescript": "^7.12.7",
+        "@hot-loader/react-dom": "17.0.1",
+        "@types/electron": "^1.6.10",
+        "@types/electron-devtools-installer": "^2.2.0",
+        "@types/react": "^17.0.0",
+        "@types/react-dom": "^17.0.0",
+        "@types/react-hot-loader": "^4.1.1",
+        "@types/react-router-dom": "^5.1.6",
+        "@types/styled-components": "^5.1.4",
+        "@types/webpack": "^4.41.25",
+        "@types/webpack-env": "^1.16.0",
+        "@typescript-eslint/eslint-plugin": "4.9.1",
+        "@typescript-eslint/parser": "4.9.1",
+        "babel-loader": "^8.2.2",
+        "cache-loader": "^4.1.0",
+        "commitizen": "^4.2.2",
+        "cross-env": "^7.0.3",
+        "css-loader": "^5.0.1",
+        "cssnano": "^4.1.10",
+        "dotenv-webpack": "6.0.0",
+        "electron": "11.0.4",
+        "electron-builder": "22.9.1",
+        "electron-devtools-installer": "^3.1.1",
+        "eslint": "^7.15.0",
+        "eslint-config-standard": "^16.0.2",
+        "eslint-plugin-import": "^2.22.1",
+        "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-promise": "^4.2.1",
+        "eslint-plugin-react": "^7.21.5",
+        "eslint-plugin-react-hooks": "^4.2.0",
+        "eslint-plugin-standard": "^5.0.0",
+        "file-loader": "^6.2.0",
+        "fork-ts-checker-webpack-plugin": "^6.0.5",
+        "html-webpack-plugin": "^4.5.0",
+        "husky": "^4.3.5",
+        "mini-css-extract-plugin": "^1.3.3",
+        "npm-run-all": "^4.1.5",
+        "optimize-css-assets-webpack-plugin": "^5.0.4",
+        "prettier": "^2.2.1",
+        "react-hot-loader": "^4.13.0",
+        "rimraf": "^3.0.2",
+        "sass": "^1.30.0",
+        "sass-loader": "^10.1.0",
+        "source-map-loader": "^1.1.3",
+        "terser-webpack-plugin": "^5.0.3",
+        "thread-loader": "^3.0.1",
+        "typescript": "4.1.2",
+        "url-loader": "^4.1.1",
+        "webpack": "4.44.2",
+        "webpack-cli": "3.3.12",
+        "webpack-dev-server": "^3.11.0",
+        "webpack-merge": "^5.5.0"
+    }
+}

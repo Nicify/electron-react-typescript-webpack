@@ -1,0 +1,11 @@
+node_modules/
+dist/
+build/
+release/*
+.vscode
+yarn-error.log
+yarn.lock
+package-lock.json
+cache
+.history/
+log/

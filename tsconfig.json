@@ -1,0 +1,36 @@
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "module": "commonjs",
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "lib": ["dom", "es2015", "es2016", "es2017", "es2018"],
+        "allowJs": true,
+        "jsx": "react",
+        "sourceMap": true,
+        "outDir": "./dist",
+        "strict": true,
+        "alwaysStrict": true,
+        "strictNullChecks": false,
+        "noImplicitAny": false,
+        "noUnusedLocals": false,
+        "experimentalDecorators": true,
+        "downlevelIteration": true,
+        "baseUrl": ".",
+        "paths": {
+            "@assets": ["src/assets"],
+            "@assets/*": ["src/assets/*"],
+            "@lib": ["src/lib"],
+            "@lib/*": ["src/lib/*"],
+            "@components": ["src/renderer/components"],
+            "@components/*": ["src/renderer/components/*"],
+            "@store": ["src/renderer/store"],
+            "@store/*": ["src/renderer/store/*"],
+            "@models": ["src/models"],
+            "@models/*": ["src/models/*"],
+            "@styles": ["src/renderer/styles"],
+            "@styles/*": ["src/renderer/styles/*"]
+        }
+    },
+    "include": ["./src/**/*", "./config/**/*.js", "./.eslintrc.js"]
+}
